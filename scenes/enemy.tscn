@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://dsl7q7v428eun"]
+
+[ext_resource type="Script" uid="uid://d37riqvj2xodx" path="res://scripts/enemy.gd" id="1_4ra3w"]
+[ext_resource type="Texture2D" uid="uid://b5g0ktd8bifaq" path="res://assets/sprites/slime_green.png" id="1_7p1mj"]
+[ext_resource type="PackedScene" uid="uid://www2v8nqlqm8" path="res://scenes/killzone.tscn" id="2_md0e3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7p1mj"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(0, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_md0e3"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(24, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ra3w"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(48, 24, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5uy6h"]
+atlas = ExtResource("1_7p1mj")
+region = Rect2(72, 24, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_c4w8v"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7p1mj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_md0e3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ra3w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5uy6h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
+size = Vector2(14, 15)
+
+[node name="Enemy" type="Node2D" groups=["enemies"]]
+script = ExtResource("1_4ra3w")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_c4w8v")
+autoplay = "default"
+frame_progress = 0.26824
+flip_h = true
+
+[node name="Killzone" parent="." instance=ExtResource("2_md0e3")]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-559, -204.5)
+shape = SubResource("RectangleShape2D_md0e3")
+
+[connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]

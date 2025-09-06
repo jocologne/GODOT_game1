@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://c6afg5v1o363y"]
+
+[ext_resource type="Texture2D" uid="uid://cykw6xdw2ejht" path="res://assets/sprites/world_tileset.png" id="1_3inec"]
+[ext_resource type="Script" uid="uid://clkjjhqcb1kt6" path="res://scripts/box.gd" id="2_ks2v0"]
+[ext_resource type="PackedScene" uid="uid://dgxljcmcag5jh" path="res://scenes/coin.tscn" id="3_c2ln5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3inec"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ks2v0"]
+size = Vector2(16, 0.105591)
+
+[node name="Box" type="StaticBody2D"]
+
+[node name="sprite_base" type="Sprite2D" parent="."]
+texture = ExtResource("1_3inec")
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 16)
+
+[node name="sprite_hit" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_3inec")
+region_enabled = true
+region_rect = Rect2(16, 16, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3inec")
+
+[node name="Colision" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("2_ks2v0")
+coin_scene = ExtResource("3_c2ln5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colision"]
+position = Vector2(0, 8.082)
+scale = Vector2(0.805, 0.805)
+shape = SubResource("RectangleShape2D_ks2v0")
+
+[connection signal="body_entered" from="Colision" to="Colision" method="_on_body_entered"]
