@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dsl7q7v428eun"]
+[gd_scene load_steps=11 format=3 uid="uid://dsl7q7v428eun"]
 
 [ext_resource type="Script" uid="uid://d37riqvj2xodx" path="res://scripts/enemy.gd" id="1_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://b5g0ktd8bifaq" path="res://assets/sprites/slime_green.png" id="1_7p1mj"]
@@ -43,7 +43,10 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_md0e3"]
 size = Vector2(14, 15)
 
-[node name="Enemy" type="Node2D" groups=["enemies"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4ra3w"]
+size = Vector2(14, 15)
+
+[node name="Enemy" type="Area2D" groups=["enemies"]]
 script = ExtResource("1_4ra3w")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -59,5 +62,10 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 position = Vector2(-559, -204.5)
 shape = SubResource("RectangleShape2D_md0e3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -7.5)
+shape = SubResource("RectangleShape2D_4ra3w")
+debug_color = Color(0.898563, 0.150426, 0.678283, 0.42)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]

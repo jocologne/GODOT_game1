@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@export var arrow_scene: PackedScene = preload("res://scenes/arrow.tscn")
 
 const SPEED = 100.0
 const JUMP_VELOCITY = -320.0
@@ -32,6 +33,10 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	move_and_slide()
 
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("fire"):
+		spaw_arrow()
+
 func die():
 	if not is_alive:
 		return
@@ -42,4 +47,11 @@ func flip_sprite(dir, sprite):
 		sprite.flip_h = false
 	elif dir < 0:
 		sprite.flip_h = true
+	pass
+
+func spaw_arrow():
+	var arrow = arrow_scene.instantiate()
+	arrow.global_position = global_position
+	arrow.rotation = rotation
+	get_tree().current_scene.add_child(arrow)
 	pass
