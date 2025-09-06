@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
+@export var coin_scene: PackedScene
 
 @export var dist := 0
 @export var speed:= 0
@@ -21,6 +22,10 @@ func _process(delta: float) -> void:
 		dir.x *= -1
 		animated_sprite.flip_h = false
 	pass
-	
+
 func kill():
+	var coin = coin_scene.instantiate()
+	coin.global_position = global_position + Vector2(0, -6)
+	get_tree().current_scene.add_child(coin)
+	queue_free()
 	pass

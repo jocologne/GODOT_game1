@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://dsl7q7v428eun"]
+[gd_scene load_steps=12 format=3 uid="uid://dsl7q7v428eun"]
 
 [ext_resource type="Script" uid="uid://d37riqvj2xodx" path="res://scripts/enemy.gd" id="1_4ra3w"]
 [ext_resource type="Texture2D" uid="uid://b5g0ktd8bifaq" path="res://assets/sprites/slime_green.png" id="1_7p1mj"]
+[ext_resource type="PackedScene" uid="uid://dgxljcmcag5jh" path="res://scenes/coin.tscn" id="2_5uy6h"]
 [ext_resource type="PackedScene" uid="uid://www2v8nqlqm8" path="res://scenes/killzone.tscn" id="2_md0e3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7p1mj"]
@@ -48,6 +49,7 @@ size = Vector2(14, 15)
 
 [node name="Enemy" type="Area2D" groups=["enemies"]]
 script = ExtResource("1_4ra3w")
+coin_scene = ExtResource("2_5uy6h")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
