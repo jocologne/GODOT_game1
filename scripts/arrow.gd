@@ -1,14 +1,18 @@
 extends Area2D
-@onready var timer: Timer = $Timer
 
-var ARROW_SPEED := 250
+@onready var timer: Timer = $Timer
+@onready var sprite: Sprite2D = $Sprite2D
+
+var ARROW_SPEED := 180
+var direction := Vector2.RIGHT
 
 func _ready() -> void:
+	sprite.flip_h = direction.x < 0
 	timer.start()
 	pass
 
 func _process(delta: float) -> void:
-	position.x += ARROW_SPEED * delta
+	position += direction.normalized() * ARROW_SPEED * delta
 	pass
 
 func _on_area_entered(area: Area2D) -> void:

@@ -7,7 +7,7 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -320.0
 
 var is_alive := true
-var number_of_arrows: int = 5
+var number_of_arrows: int = 500
 
 func _physics_process(delta: float) -> void:
 	var direction = 0
@@ -34,9 +34,13 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	move_and_slide()
 
-
+var facing_right = true
 
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("move_right"):
+		facing_right = true
+	if Input.is_action_just_pressed("move_left"):
+		facing_right = false
 	if Input.is_action_just_pressed("fire") and number_of_arrows > 0:
 		spaw_arrow()
 		number_of_arrows -= 1
@@ -57,6 +61,10 @@ func flip_sprite(dir, sprite):
 func spaw_arrow():
 	var arrow = arrow_scene.instantiate()
 	arrow.global_position = global_position + Vector2(3, -8)
+	if facing_right:
+		arrow.direction = Vector2.RIGHT
+	else:
+		arrow.direction = Vector2.LEFT
 	arrow.rotation = rotation
 	get_tree().current_scene.add_child(arrow)
 	pass
