@@ -327,6 +327,15 @@ position = Vector2(1576, -192)
 [node name="Box6" parent="Boxes" instance=ExtResource("7_u5sy4")]
 position = Vector2(1512, -192)
 
+[node name="Arrow_box" parent="Boxes" instance=ExtResource("12_dinhu")]
+position = Vector2(0, -32)
+
+[node name="Arrow_box2" parent="Boxes" instance=ExtResource("12_dinhu")]
+position = Vector2(296, -96)
+
+[node name="Arrow_box3" parent="Boxes" instance=ExtResource("12_dinhu")]
+position = Vector2(1224, -192)
+
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Enemy" parent="Enemies" instance=ExtResource("8_gee14")]
@@ -347,15 +356,6 @@ position = Vector2(556, -158)
 
 [node name="Save_point2" parent="Save_Points" instance=ExtResource("10_vtaks")]
 position = Vector2(1198, -174)
-
-[node name="Arrow_box" parent="." instance=ExtResource("12_dinhu")]
-position = Vector2(0, -32)
-
-[node name="Arrow_box2" parent="." instance=ExtResource("12_dinhu")]
-position = Vector2(296, -96)
-
-[node name="Arrow_box3" parent="." instance=ExtResource("12_dinhu")]
-position = Vector2(1224, -192)
 
 [connection signal="body_entered" from="Killzone" to="Killzone" method="_on_body_entered"]
 [connection signal="timeout" from="Killzone/Timer2" to="Killzone" method="_on_timer_timeout"]

@@ -19,3 +19,4 @@ func _on_timer_timeout() -> void:
 		player.spawn()
 	else:
 		print("Not enough gold to respawn")
+		get_tree().quit()
