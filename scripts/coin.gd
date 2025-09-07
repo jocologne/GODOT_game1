@@ -11,6 +11,7 @@ func _process(delta: float) -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	print("Coin")
+	body.bank += 1
+	print(body.bank)
 	queue_free()
 	pass # Replace with function body.

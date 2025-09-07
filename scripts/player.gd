@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@onready var game: Node2D = $".."
 @onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @export var arrow_scene: PackedScene = preload("res://scenes/arrow.tscn")
 
@@ -8,6 +9,7 @@ const JUMP_VELOCITY = -320.0
 
 var is_alive := true
 var number_of_arrows: int = 500
+var bank: int = 6
 
 func _physics_process(delta: float) -> void:
 	var direction = 0
@@ -36,6 +38,10 @@ func _physics_process(delta: float) -> void:
 
 var facing_right = true
 
+func _ready() -> void:
+	global_position = game.player_start_position
+	pass
+
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("move_right"):
 		facing_right = true
@@ -50,6 +56,13 @@ func die():
 	if not is_alive:
 		return
 	is_alive = false
+	
+func spawn():
+	global_position = game.player_start_position
+	is_alive = true
+	velocity = Vector2.ZERO
+	animated_sprite.play("idle")
+	pass
 	
 func flip_sprite(dir, sprite):
 	if dir > 0:
