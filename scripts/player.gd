@@ -8,8 +8,8 @@ const SPEED = 100.0
 const JUMP_VELOCITY = -320.0
 
 var is_alive := true
-var number_of_arrows: int = 500
 var bank: int = 6
+var quiver: int = 5
 
 func _physics_process(delta: float) -> void:
 	var direction = 0
@@ -47,10 +47,10 @@ func _process(delta: float) -> void:
 		facing_right = true
 	if Input.is_action_just_pressed("move_left"):
 		facing_right = false
-	if Input.is_action_just_pressed("fire") and number_of_arrows > 0:
+	if Input.is_action_just_pressed("fire") and quiver > 0:
 		spaw_arrow()
-		number_of_arrows -= 1
-		print("you have ", number_of_arrows, " arrows")
+		quiver -= 1
+		print("you have ", quiver, " arrows")
 
 func die():
 	if not is_alive:

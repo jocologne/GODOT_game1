@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://h3sb43xqa4n4"]
+
+[ext_resource type="Texture2D" uid="uid://cykw6xdw2ejht" path="res://assets/sprites/world_tileset.png" id="1_f7glr"]
+[ext_resource type="Script" uid="uid://ustekjjbb8t3" path="res://scripts/arrow_box.gd" id="2_l2eww"]
+[ext_resource type="PackedScene" uid="uid://diekye134k410" path="res://scenes/arrow.tscn" id="3_f7glr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3inec"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ks2v0"]
+size = Vector2(16, 0.105591)
+
+[node name="Arrow_box" type="StaticBody2D"]
+
+[node name="sprite_base" type="Sprite2D" parent="."]
+texture = ExtResource("1_f7glr")
+region_enabled = true
+region_rect = Rect2(0, 32, 16, 16)
+
+[node name="sprite_hit" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_f7glr")
+region_enabled = true
+region_rect = Rect2(16, 16, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3inec")
+
+[node name="Colision" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("2_l2eww")
+arrow_scene = ExtResource("3_f7glr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Colision"]
+position = Vector2(0, 8.082)
+scale = Vector2(0.805, 0.805)
+shape = SubResource("RectangleShape2D_ks2v0")
+
+[connection signal="body_entered" from="Colision" to="Colision" method="_on_body_entered"]

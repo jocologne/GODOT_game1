@@ -13,5 +13,9 @@ func _on_body_entered(body: Node2D) -> void:
 
 func _on_timer_timeout() -> void:
 	Engine.time_scale = 1
-	if player.has_method("spawn"):
+	if player.has_method("spawn") and player.bank >= 5:
+		player.bank -= 5
+		print("You now have ", player.bank, " gold after respawn.")
 		player.spawn()
+	else:
+		print("Not enough gold to respawn")

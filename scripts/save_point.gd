@@ -1,6 +1,6 @@
 extends Area2D
 
-@onready var game: Node2D = $".."
+@onready var game: Node2D = $"../.."
 
 var is_player_near = false
 var player: Node2D = null
